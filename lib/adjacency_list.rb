@@ -14,5 +14,10 @@ class AdjacencyList
         self.adjacency_array.push(list)
     end
 
+    def addEdge(int src, int dst)
+        list = adjacency_array[src]
+        dstNode = adjacency_array[dst]
+        list.append(dstNode)
+    end
 
 end
