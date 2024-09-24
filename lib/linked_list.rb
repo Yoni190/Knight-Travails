@@ -7,8 +7,9 @@ class LinkedList
     self.head = nil
   end
 
+
   def append(value)
-    if head.nil?
+    if self.head.nil?
       self.head = Node.new(value)
     else
       temp = head
@@ -97,8 +98,8 @@ class LinkedList
       temp = temp.next_node
     end
     list += "nil"
-    list
-  end
+   list
+ end
 
   def insert(value, index)
     temp = head

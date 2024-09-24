@@ -2,10 +2,9 @@ require_relative 'linked_list'
 
 class AdjacencyList
     attr_accessor :adjacency_array
-    @@size = 64
 
     def initialize
-        self.adjacency_array = Array.new(@@size)
+        self.adjacency_array = []
     end
 
     def addNode(value)
@@ -14,10 +13,14 @@ class AdjacencyList
         self.adjacency_array.push(list)
     end
 
-    def addEdge(int src, int dst)
-        list = adjacency_array[src]
-        dstNode = adjacency_array[dst]
-        list.append(dstNode)
+    def addEdge(src, dst)
+        srcList = self.adjacency_array[src]
+        dstList = self.adjacency_array[dst]
+        srcList.append(dstList.head.value)
+        dstList.append(srcList.head.value)
     end
 
+    def to_s
+        puts adjacency_array
+    end
 end
