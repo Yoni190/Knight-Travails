@@ -14,47 +14,55 @@ class Knight
     end
 
 
-def knight_moves(starting, ending)
-    start_index = find_node_index(start)
-    
-
-end
-
-def bfs(starting, ending)
-
-    parents = {starting=>"none"}
-    first = true
-    queue = [start]
-    start_index = find_node_index(queue[0])
-    visited = [start]
-    num_of_nodes = ad_list.adjacency_array[start_index].count_nodes
-   
-    i = 0
-    j = 1
-
-    while !queue.include?(ending)
-        while i < num_of_nodes - 1
-            queue.push(ad_list.adjacency_array[start_index].at(i + 1).value)
-            i += 1
-            parents[queue[i]] = visited[j-1]
-        end
-        if first
-            visited.push(queue.shift).uniq!
-            first = false
-        end
-        visited.push(queue.shift)
+    def knight_moves(starting, ending)
+        start_index = find_node_index(start)
         
-        start_index = find_node_index(visited[j])
-        num_of_nodes = ad_list.adjacency_array[start_index].count_nodes
-        i = 0
-        j += 1
+
     end
 
+    def bfs(starting, ending)
 
-    return visited
+        parents = {starting=>"none"}
+        first = true
+        queue = [start]
+        start_index = find_node_index(queue[0])
+        visited = [start]
+        num_of_nodes = ad_list.adjacency_array[start_index].count_nodes
+    
+        i = 0
+        j = 1
 
+        while !queue.include?(ending)
+            while i < num_of_nodes - 1
+                queue.push(ad_list.adjacency_array[start_index].at(i + 1).value)
+                i += 1
+                parents[queue[i]] = visited[j-1]
+            end
+            if first
+                visited.push(queue.shift).uniq!
+                first = false
+            end
+            visited.push(queue.shift)
+            
+            start_index = find_node_index(visited[j])
+            num_of_nodes = ad_list.adjacency_array[start_index].count_nodes
+            i = 0
+            j += 1
+        end
+        
+        path = reconstruct_path(parents, ending)
+        return path
+    end
 
-end
+    def reconstruct_path(hash, destination)
+        path = [destination]
+        ds = destination
+        while hash[ds] != "none"
+            path.push(hash[ds])
+            ds = hash[ds]
+        end
+        return path
+    end
 
 
     def add_squares(ad_list)
