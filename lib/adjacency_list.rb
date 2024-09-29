@@ -14,6 +14,6 @@ class AdjacencyList
     end
 
     def to_s
-        puts list
+        self.list.map {|key, value| "#{key}: #{value}"}.join("\n")
     end
 end

@@ -15,23 +15,25 @@ class Knight
 
 
     def knight_moves(starting, ending)
-        path = bfs(starting, ending)
-        
-        puts path
     end
 
     def bfs(starting, ending)
+        queue = [starting]
+        visited = []
 
+        while !queue.empty?
+            adjacent_squares = ad_list.list[starting]
+            adjacent_squares.each do |adjacent_square| 
+                if !visited.include?(adjacent_square)
+                    queue.push(adjacent_square)
+                end
+            end
+            visited.push(queue.shift).uniq!
+            starting = queue[0]
+        end
     end
 
     def reconstruct_path(hash, destination)
-        path = [destination]
-        ds = destination
-        while hash[ds] != "none"
-            path.push(hash[ds])
-            ds = hash[ds]
-        end
-        return path
     end
 
 
