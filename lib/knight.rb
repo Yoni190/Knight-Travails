@@ -15,43 +15,13 @@ class Knight
 
 
     def knight_moves(starting, ending)
-        start_index = find_node_index(start)
+        path = bfs(starting, ending)
         
-
+        puts path
     end
 
     def bfs(starting, ending)
 
-        parents = {starting=>"none"}
-        first = true
-        queue = [start]
-        start_index = find_node_index(queue[0])
-        visited = [start]
-        num_of_nodes = ad_list.adjacency_array[start_index].count_nodes
-    
-        i = 0
-        j = 1
-
-        while !queue.include?(ending)
-            while i < num_of_nodes - 1
-                queue.push(ad_list.adjacency_array[start_index].at(i + 1).value)
-                i += 1
-                parents[queue[i]] = visited[j-1]
-            end
-            if first
-                visited.push(queue.shift).uniq!
-                first = false
-            end
-            visited.push(queue.shift)
-            
-            start_index = find_node_index(visited[j])
-            num_of_nodes = ad_list.adjacency_array[start_index].count_nodes
-            i = 0
-            j += 1
-        end
-        
-        path = reconstruct_path(parents, ending)
-        return path
     end
 
     def reconstruct_path(hash, destination)
@@ -70,7 +40,7 @@ class Knight
         y = 0
         while x < 8
             while y < 8
-                ad_list.add_node("[#{x}, #{y}]")
+                ad_list.append([x, y])
                 y += 1
             end
             x += 1
@@ -84,28 +54,28 @@ class Knight
         while x < 8
             while y < 8
                 if x + 2 < 8 && y + 1 < 8
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x + 2}, #{y + 1}]")
+                    ad_list.add_edge([x, y], [x + 2, y + 1])
                 end
                 if x + 1 < 8 && y + 2 < 8
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x + 1}, #{y + 2}]")
+                    ad_list.add_edge([x,  y], [x + 1, y + 2])
                 end
-                if x + 2 < 8 && y -1 > 0
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x + 2}, #{y - 1}]")
+                if x + 2 < 8 && y - 1 >= 0
+                    ad_list.add_edge([x,  y], [x + 2, y - 1])
                 end
-                if x + 1 < 8 && y - 2 > 8
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x + 1}, #{y - 2}]")
+                if x + 1 < 8 && y - 2 >= 0
+                    ad_list.add_edge([x,  y], [x + 1, y - 2])
                 end
-                if x - 2 > 8 && y + 1 < 1
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x - 2}, #{y + 1}]")
+                if x - 2 >= 0 && y + 1 < 8
+                    ad_list.add_edge([x,  y], [x - 2, y + 1])
                 end
-                if x - 1 > 8 && y + 2 < 8
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x - 1}, #{y + 2}]")
+                if x - 1 >= 0 && y + 2 < 8
+                    ad_list.add_edge([x,  y], [x - 1, y + 2])
                 end
-                if x -2 > 8 && y -1 > 8
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x - 2}, #{y - 1}]")
+                if x -2 >= 0 && y -1 >= 0
+                    ad_list.add_edge([x,  y], [x - 2, y - 1])
                 end
-                if x - 1 > 8 && y - 2 > 8
-                    ad_list.add_edge("[#{x}, #{y}]", "[#{x - 1}, #{y - 2}]")
+                if x - 1 >= 0 && y - 2 >= 0
+                    ad_list.add_edge([x,  y], [x - 1, y - 2])
                 end
                 y += 1
             end

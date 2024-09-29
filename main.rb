@@ -5,6 +5,6 @@ require_relative 'lib/knight'
 
 knight = Knight.new
 
-
-#ad_list.to_s
+#knight.knight_moves("[0, 0]", "[1, 2]")
 puts knight
+#ad_list.to_s

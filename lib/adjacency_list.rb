@@ -1,31 +1,19 @@
-require_relative 'linked_list'
-
 class AdjacencyList
-    attr_accessor :adjacency_array
+    attr_accessor :list
 
     def initialize
-        self.adjacency_array = []
+        self.list = {}
     end
 
-    def add_node(value)
-        list = LinkedList.new
-        list.append(value)
-        self.adjacency_array.push(list)
+    def append(square)
+        self.list[square] = []
     end
 
-    def add_edge(src, dst)
-        values = adjacency_array.map do |element|
-            element.head.value
-        end
-        src_index = values.find_index(src)
-        dst_index = values.find_index(dst)
-        srcList = adjacency_array[src_index]
-        dstList = adjacency_array[dst_index]
-        srcList.append(dstList.head.value)
-        dstList.append(srcList.head.value)
+    def add_edge(square, adjacent_square)
+        self.list[square].push(adjacent_square)
     end
 
     def to_s
-        puts adjacency_array
+        puts list
     end
 end
