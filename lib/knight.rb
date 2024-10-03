@@ -15,26 +15,41 @@ class Knight
 
 
     def knight_moves(starting, ending)
+        path = bfs(starting, ending).reverse
+        puts "You've made it in #{path.length} moves!"
+        path.each {|element| p element}
     end
 
     def bfs(starting, ending)
+        parents = {starting => nil}
         queue = [starting]
         visited = []
 
-        while !queue.empty?
+        while !queue.include?(ending)
 
             adjacent_squares = ad_list.list[starting]
             adjacent_squares.each do |adjacent_square| 
                 if !visited.include?(adjacent_square)
                     queue.push(adjacent_square)
                 end
+                if !parents.include?(adjacent_square)
+                    parents[adjacent_square] = starting
+                end
             end
             visited.push(queue.shift).uniq!
             starting = queue[0]
         end
+        reconstruct_path(parents, ending)
     end
 
     def reconstruct_path(hash, destination)
+        ds = destination
+        path = [ds]
+        while !hash[ds].nil?
+            path.push(hash[ds])
+            ds = hash[ds]
+        end
+        path
     end
 
 
