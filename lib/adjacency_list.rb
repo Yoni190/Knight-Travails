@@ -1,19 +1,19 @@
 class AdjacencyList
-    attr_accessor :list
+  attr_accessor :list
 
-    def initialize
-        self.list = {}
-    end
+  def initialize
+    self.list = {}
+  end
 
-    def append(square)
-        self.list[square] = []
-    end
+  def append(square)
+    list[square] = []
+  end
 
-    def add_edge(square, adjacent_square)
-        self.list[square].push(adjacent_square)
-    end
+  def add_edge(square, adjacent_square)
+    list[square].push(adjacent_square)
+  end
 
-    def to_s
-        self.list.map {|key, value| "#{key}: #{value}"}.join("\n")
-    end
+  def to_s
+    list.map { |key, value| "#{key}: #{value}" }.join("\n")
+  end
 end
