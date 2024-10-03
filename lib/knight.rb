@@ -22,6 +22,7 @@ class Knight
         visited = []
 
         while !queue.empty?
+
             adjacent_squares = ad_list.list[starting]
             adjacent_squares.each do |adjacent_square| 
                 if !visited.include?(adjacent_square)
