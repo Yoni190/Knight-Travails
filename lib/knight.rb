@@ -13,11 +13,27 @@ class Knight
 
     end
 
+    def is_legal?(starting, ending)
+        moves = starting + ending
+        result = moves.map do |coor| 
+            if coor >= 8 || coor < 0
+                false
+            else 
+                true
+            end
+        end
+        result.all?(true) ? true : false
+    end
+
 
     def knight_moves(starting, ending)
-        path = bfs(starting, ending).reverse
-        puts "You've made it in #{path.length} moves!"
-        path.each {|element| p element}
+        if is_legal?(starting, ending)
+            path = bfs(starting, ending).reverse
+            puts "You've made it in #{path.length} moves!"
+            path.each {|element| p element}
+        else
+            puts 'Invalid path'
+        end
     end
 
     def bfs(starting, ending)
